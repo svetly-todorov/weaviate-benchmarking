@@ -13,12 +13,12 @@ services:
     - --host
     - 0.0.0.0
     - --port
-    - '8080'
+    - '11550'
     - --scheme
     - http
     image: docker.io/semitechnologies/weaviate:1.13.2
     ports:
-      - 8080:8080
+      - 11550:11550
     volumes:
       - $PWD/weaviate-data:/var/lib/weaviate
     restart: on-failure:0

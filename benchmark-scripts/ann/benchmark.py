@@ -4,7 +4,7 @@ from functions import *
 if __name__ == '__main__':
 
     # variables
-    weaviate_url = 'http://weaviate:8080'
+    weaviate_url = 'http://weaviate:11550' # change to local ip
     CPUs = 32
     efConstruction_array = [64, 128]
     maxConnections_array = [16, 32]

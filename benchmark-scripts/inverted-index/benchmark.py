@@ -202,7 +202,7 @@ if __name__ == '__main__':
  
     # Connect to Weaviate Weaviate
     try:
-        client = weaviate.Client("http://weaviate:8080")
+        client = weaviate.Client("http://weaviate:11550") # change to local ip
     except:
         print('Error, can\'t connect to Weaviate, is it running?')
         exit(1)
