@@ -244,6 +244,17 @@ def import_into_weaviate(client, efConstruction, maxConnections, benchmark_file)
 
     return import_time
 
+def netcat(host: str, port: int, msg: str):
+    echo = f"echo {msg}"
+    subprocess.run(f"{echo} | nc {host} {port}", shell=True)
+
+def request_start_perf(data_file: str):
+    netcat("host.docker.internal", 12345, f"START {data_file}")
+    return
+
+def request_stop_perf():
+    netcat("host.docker.internal", 12345, "STOP")
+    return
 
 def run_the_benchmarks(weaviate_url, CPUs, efConstruction_array, maxConnections_array, ef_array, benchmark_file_array):
     '''Runs the actual benchmark.
@@ -266,12 +277,16 @@ def run_the_benchmarks(weaviate_url, CPUs, efConstruction_array, maxConnections_
             for maxConnections in maxConnections_array:
                
                 # import data
+                request_start_perf("import_" + str(efConstruction) + "_" + str(maxConnections))
                 import_time = import_into_weaviate(client, efConstruction, maxConnections, benchmark_file)
+                request_stop_perf()
 
                 # Find neighbors based on UUID and ef settings
                 results = []
                 for ef in ef_array:
+                    request_start_perf("bench_" + str(CPUs) + "_" + str(ef) + "_" + str(efConstruction) + "_" + str(maxConnections))
                     result = conduct_benchmark(weaviate_url, CPUs, ef, client, benchmark_file, efConstruction, maxConnections)
+                    request_stop_perf()
                     result['importTime'] = import_time
                     results.append(result)
                 

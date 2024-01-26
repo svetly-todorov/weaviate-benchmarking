@@ -5,6 +5,8 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile-ann
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - $PWD/benchmark-data:/var/hdf5
       - $PWD/results:/var/lib/benchmark/results
