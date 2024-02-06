@@ -11,9 +11,9 @@ if __name__ == '__main__':
     ef_array = [64, 128, 256, 512]
 
     benchmark_file_array = [
-        ['deep-image-96-angular.hdf5', 'cosine'],
-        ['mnist-784-euclidean.hdf5', 'l2-squared'],
-        ['gist-960-euclidean.hdf5', 'l2-squared'],
+       #  ['deep-image-96-angular.hdf5', 'cosine'],
+       #  ['mnist-784-euclidean.hdf5', 'l2-squared'],
+       #  ['gist-960-euclidean.hdf5', 'l2-squared'],
         ['glove-25-angular.hdf5', 'cosine']
     ]   
  

@@ -277,14 +277,14 @@ def run_the_benchmarks(weaviate_url, CPUs, efConstruction_array, maxConnections_
             for maxConnections in maxConnections_array:
                
                 # import data
-                request_start_perf("import_" + str(efConstruction) + "_" + str(maxConnections))
+                request_start_perf("import_" + benchmark_file[0] + "_" + str(efConstruction) + "_" + str(maxConnections))
                 import_time = import_into_weaviate(client, efConstruction, maxConnections, benchmark_file)
                 request_stop_perf()
 
                 # Find neighbors based on UUID and ef settings
                 results = []
                 for ef in ef_array:
-                    request_start_perf("bench_" + str(CPUs) + "_" + str(ef) + "_" + str(efConstruction) + "_" + str(maxConnections))
+                    request_start_perf("bench_" + benchmark_file[0] + "_" + str(CPUs) + "_" + str(ef) + "_" + str(efConstruction) + "_" + str(maxConnections))
                     result = conduct_benchmark(weaviate_url, CPUs, ef, client, benchmark_file, efConstruction, maxConnections)
                     request_stop_perf()
                     result['importTime'] = import_time
@@ -299,3 +299,4 @@ def run_the_benchmarks(weaviate_url, CPUs, efConstruction_array, maxConnections_
                     json.dump(results, outfile)
 
     loguru.logger.info('completed')
+
