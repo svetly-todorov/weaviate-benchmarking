@@ -21,6 +21,7 @@ services:
     image: docker.io/semitechnologies/weaviate:1.13.2
     ports:
       - 11550:11550
+      - 22024:22024
     volumes:
       - $PWD/weaviate-data:/var/lib/weaviate
     restart: on-failure:0
